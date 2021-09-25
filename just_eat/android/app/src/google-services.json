@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "120625794408",
+    "project_id": "justeat-326106",
+    "storage_bucket": "justeat-326106.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120625794408:android:3c5e8d6aa7404c4aea1add",
+        "android_client_info": {
+          "package_name": "com.example.just_eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120625794408-qln8k1brj0q10n32ahvbl6fsr398rdpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.just_eat",
+            "certificate_hash": "9b08a9e6cf829a456b183552056cf91afcc7b409"
+          }
+        },
+        {
+          "client_id": "120625794408-12nbn3t5ebk1oie15qaa1vm3rthnatpv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrG3DJXABrwsEjGO7I7syQqg5wVDO93Sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120625794408-12nbn3t5ebk1oie15qaa1vm3rthnatpv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

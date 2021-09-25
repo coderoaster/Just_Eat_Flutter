@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:just_eat/Popup/Detail.dart';
 
 List<double> _x = [
   37.5656881134626,
@@ -21,6 +20,7 @@ List<double> _y = [
   126.97714692170683
 ];
 List<Marker> _markers = [];
+int test = 0;
 
 class PageHome extends StatefulWidget {
   @override
@@ -56,13 +56,32 @@ class GooleMapPage extends State<PageHome> {
       _markers.add(Marker(
           markerId: MarkerId("$i"),
           draggable: true,
-          onTap: () => showModalBottomSheet(
-              shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(50))),
-              context: context,
-              builder: buildBottomSheet),
+          onTap: () {
+            test = i;
+            showModalBottomSheet(
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(50))),
+                context: context,
+                builder: buildBottomSheet);
+          },
           position: LatLng(_x[i], _y[i])));
     }
   }
+}
+
+Widget buildBottomSheet(BuildContext context) {
+  double y = _y[test];
+  double x = _x[test];
+  return Container(
+    child: Column(
+      children: [
+        SizedBox(
+          height: 50,
+        ),
+        Text("Y좌표 : $y"),
+        Text("X좌표 : $x")
+      ],
+    ),
+  );
 }
