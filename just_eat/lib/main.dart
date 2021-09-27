@@ -1,14 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'Page/Home.dart';
+import 'Page/Intro.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(GetMaterialApp(
     title: "Just_Eat",
-    initialRoute: '/home',
+    initialRoute: '/intro',
     getPages: pages,
-    // home: MapSample(),
   ));
 }
 
@@ -18,4 +20,9 @@ final pages = [
     transition: Transition.fade,
     page: () => PageHome(),
   ),
+  GetPage(
+    name: '/intro',
+    page: () => IntroPage(),
+    transition: Transition.fade,
+  )
 ];

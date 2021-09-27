@@ -1,6 +1,7 @@
 import 'dart:async';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 List<double> _x = [
@@ -29,29 +30,15 @@ class PageHome extends StatefulWidget {
 
 class GooleMapPage extends State<PageHome> {
   Completer<GoogleMapController> _controller = Completer();
-
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.56560879490811, 126.9768763757379),
     zoom: 10,
   );
 
   @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        markers: Set.from(_markers),
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-    );
-  }
-
-  @override
   void initState() {
     super.initState();
+    print("test : ${Get.arguments}");
     for (int i = 0; i < _y.length; i++) {
       _markers.add(Marker(
           markerId: MarkerId("$i"),
@@ -67,6 +54,20 @@ class GooleMapPage extends State<PageHome> {
           },
           position: LatLng(_x[i], _y[i])));
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: GoogleMap(
+        mapType: MapType.normal,
+        markers: Set.from(_markers),
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
+    );
   }
 }
 
