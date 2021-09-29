@@ -77,14 +77,29 @@ class GooleMapPage extends State<PageHome> {
 Widget buildBottomSheet(BuildContext context) {
   String name = storeData[seq]["name"];
   String address = storeData[seq]["address"];
+  String address2 = storeData[seq]["address2"];
+  String url = storeData[seq]["url"];
+  String tell = storeData[seq]["tell"];
+  String time = storeData[seq]["time"];
   return Container(
     child: Column(
-      children: [
+      children: <Widget>[
         SizedBox(
           height: 50,
         ),
+        Container(
+          width: 300,
+          height: 300,
+          child: Image.network(
+            "$url",
+            fit: BoxFit.contain,
+          ),
+        ),
         Text("가게이름 : $name"),
-        Text("가게주소 : $address")
+        Text("도로명 주소 : $address"),
+        Text("지번 주소 : $address2"),
+        Text("전화번호 : $tell"),
+        Text("영업시간 : $time")
       ],
     ),
   );

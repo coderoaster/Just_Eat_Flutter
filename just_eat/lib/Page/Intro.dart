@@ -20,6 +20,7 @@ class _IntroPageState extends State<IntroPage> {
     var documentSnapshot =
         await firestore.collection("data").doc('store').get();
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+    print("test : $data");
     List<dynamic> storeData = data['detail'];
     Get.toNamed("home", arguments: storeData);
   }
