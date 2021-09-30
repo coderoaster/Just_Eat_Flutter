@@ -17,10 +17,11 @@ class IntroPage extends StatefulWidget {
 class _IntroPageState extends State<IntroPage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   startTime() async {
-    var documentSnapshot =
-        await firestore.collection("data").doc('store').get();
+    var documentSnapshot = await firestore
+        .collection("storeData")
+        .doc('ca36ea10-218b-11ec-becd-2d1c0d0734c8')
+        .get();
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
-    print("test : $data");
     List<dynamic> storeData = data['detail'];
     Get.toNamed("home", arguments: storeData);
   }

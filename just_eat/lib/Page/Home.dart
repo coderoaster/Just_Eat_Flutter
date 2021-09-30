@@ -77,7 +77,6 @@ class GooleMapPage extends State<PageHome> {
 Widget buildBottomSheet(BuildContext context) {
   String name = storeData[seq]["name"];
   String address = storeData[seq]["address"];
-  String address2 = storeData[seq]["address2"];
   String url = storeData[seq]["url"];
   String tell = storeData[seq]["tell"];
   String time = storeData[seq]["time"];
@@ -96,8 +95,7 @@ Widget buildBottomSheet(BuildContext context) {
           ),
         ),
         Text("가게이름 : $name"),
-        Text("도로명 주소 : $address"),
-        Text("지번 주소 : $address2"),
+        Text("주소 : $address"),
         Text("전화번호 : $tell"),
         Text("영업시간 : $time")
       ],
