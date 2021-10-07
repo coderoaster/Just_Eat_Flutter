@@ -15,7 +15,7 @@ class _IntroPageState extends State<IntroPage> {
   startTime() async {
     var documentSnapshot = await firestore
         .collection("storeData")
-        .doc('ca36ea10-218b-11ec-becd-2d1c0d0734c8')
+        .doc('5b80fbe0-2741-11ec-98ad-6d31813b3c3f')
         .get();
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
     List<dynamic> storeData = data['detail'];

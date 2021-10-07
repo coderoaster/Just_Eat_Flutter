@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:ui';
 
 List<Marker> _markers = [];
 int seq = 0;
@@ -14,8 +17,8 @@ class PageHome extends StatefulWidget {
 }
 
 class GooleMapPage extends State<PageHome> {
+  late Uint8List markerIcon;
   Completer<GoogleMapController> _controller = Completer();
-
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.56560879490811, 126.9768763757379),
     zoom: 10,
@@ -24,6 +27,22 @@ class GooleMapPage extends State<PageHome> {
   @override
   void initState() {
     super.initState();
+    setCustomMapPin();
+  }
+
+  void setCustomMapPin() async {
+    markerIcon = await getBytesFromAsset('images/customMarker.png', 130);
+  }
+
+  // 커스텀 마커 이미지 적용
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    Codec codec = await instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   @override
@@ -32,6 +51,7 @@ class GooleMapPage extends State<PageHome> {
       _markers.add(Marker(
           markerId: MarkerId("$i"),
           draggable: true,
+          icon: BitmapDescriptor.fromBytes(markerIcon),
           infoWindow: InfoWindow(
               title: storeData[i]['name'],
               onTap: () {
@@ -81,7 +101,8 @@ Widget buildBottomSheet(BuildContext context) {
   String img = storeData[seq]["img"];
   String holiday = storeData[seq]["holiday"];
   String youtube = storeData[seq]["youtube"];
-  return Container(
+  return SingleChildScrollView(
+      child: Container(
     child: Column(
       children: <Widget>[
         SizedBox(
@@ -99,9 +120,13 @@ Widget buildBottomSheet(BuildContext context) {
         Text("주소 : $address"),
         Text("전화번호 : $tell"),
         Text("영업시간 : $time"),
-        Text("휴무일 : "),
+        Text("휴무일 : $holiday"),
         Text("SNS : $url"),
+        Text("유튜브 : $youtube"),
+        SizedBox(
+          height: 50,
+        ),
       ],
     ),
-  );
+  ));
 }
