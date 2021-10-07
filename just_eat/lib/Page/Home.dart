@@ -24,7 +24,10 @@ class GooleMapPage extends State<PageHome> {
   @override
   void initState() {
     super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     for (int i = 0; i < storeData.length; i++) {
       _markers.add(Marker(
           markerId: MarkerId("$i"),
@@ -56,10 +59,6 @@ class GooleMapPage extends State<PageHome> {
           },
           position: LatLng(storeData[i]['x'], storeData[i]['y'])));
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
