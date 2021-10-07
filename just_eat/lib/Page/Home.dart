@@ -79,6 +79,9 @@ Widget buildBottomSheet(BuildContext context) {
   String url = storeData[seq]["url"];
   String tell = storeData[seq]["tell"];
   String time = storeData[seq]["time"];
+  String img = storeData[seq]["img"];
+  String holiday = storeData[seq]["holiday"];
+  String youtube = storeData[seq]["youtube"];
   return Container(
     child: Column(
       children: <Widget>[
@@ -89,14 +92,16 @@ Widget buildBottomSheet(BuildContext context) {
           width: 300,
           height: 300,
           child: Image.network(
-            "$url",
+            "$img",
             fit: BoxFit.contain,
           ),
         ),
         Text("가게이름 : $name"),
         Text("주소 : $address"),
         Text("전화번호 : $tell"),
-        Text("영업시간 : $time")
+        Text("영업시간 : $time"),
+        Text("휴무일 : "),
+        Text("SNS : $url"),
       ],
     ),
   );
