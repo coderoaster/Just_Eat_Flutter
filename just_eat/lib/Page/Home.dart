@@ -32,6 +32,7 @@ class GooleMapPage extends State<PageHome> {
 
   void setCustomMapPin() async {
     markerIcon = await getBytesFromAsset('images/customMarker.png', 130);
+    // print(markerIcon);
   }
 
   // 커스텀 마커 이미지 적용
@@ -51,7 +52,7 @@ class GooleMapPage extends State<PageHome> {
       _markers.add(Marker(
           markerId: MarkerId("$i"),
           draggable: true,
-          icon: BitmapDescriptor.fromBytes(markerIcon),
+          // icon: BitmapDescriptor.fromBytes(markerIcon),
           infoWindow: InfoWindow(
               title: storeData[i]['name'],
               onTap: () {
