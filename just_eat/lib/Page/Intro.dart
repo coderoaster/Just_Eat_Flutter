@@ -19,7 +19,7 @@ class _IntroPageState extends State<IntroPage> {
         .get();
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
     List<dynamic> storeData = data['detail'];
-    Get.toNamed("home", arguments: storeData);
+    Get.offAll("home", arguments: storeData);
   }
 
   void goHome() {}
@@ -32,6 +32,25 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  width: Get.width,
+                  height: Get.height,
+                  color: Colors.white,
+                  child: Image.asset("assets/images/imgSplash.png"),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
