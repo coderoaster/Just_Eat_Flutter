@@ -9,15 +9,16 @@ import 'dart:ui';
 List<Marker> _markers = [];
 int seq = 0;
 bool check = false;
-List<dynamic> storeData = Get.arguments;
+List<dynamic> storeData = Get.arguments['data'];
+Uint8List markerIcon = Get.arguments['marker'];
 
 class PageHome extends StatefulWidget {
-  @override
   State<PageHome> createState() => GooleMapPage();
 }
 
 class GooleMapPage extends State<PageHome> {
-  late Uint8List markerIcon;
+  // late Uint8List markerIcon;
+
   Completer<GoogleMapController> _controller = Completer();
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.56560879490811, 126.9768763757379),
@@ -27,23 +28,6 @@ class GooleMapPage extends State<PageHome> {
   @override
   void initState() {
     super.initState();
-    setCustomMapPin();
-  }
-
-  void setCustomMapPin() async {
-    markerIcon = await getBytesFromAsset('images/customMarker.png', 130);
-    // print(markerIcon);
-  }
-
-  // 커스텀 마커 이미지 적용
-  Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    Codec codec = await instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ImageByteFormat.png))!
-        .buffer
-        .asUint8List();
   }
 
   @override
@@ -52,7 +36,7 @@ class GooleMapPage extends State<PageHome> {
       _markers.add(Marker(
           markerId: MarkerId("$i"),
           draggable: true,
-          // icon: BitmapDescriptor.fromBytes(markerIcon),
+          icon: BitmapDescriptor.fromBytes(markerIcon),
           infoWindow: InfoWindow(
               title: storeData[i]['name'],
               onTap: () {
@@ -81,6 +65,13 @@ class GooleMapPage extends State<PageHome> {
           position: LatLng(storeData[i]['x'], storeData[i]['y'])));
     }
     return new Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "SIPON",
+          style: TextStyle(color: Color.fromRGBO(75, 171, 132, 1)),
+        ),
+        backgroundColor: Colors.white,
+      ),
       body: GoogleMap(
         mapType: MapType.normal,
         markers: Set.from(_markers),
@@ -112,10 +103,10 @@ Widget buildBottomSheet(BuildContext context) {
         Container(
           width: 300,
           height: 300,
-          child: Image.network(
-            "$img",
-            fit: BoxFit.contain,
-          ),
+          // child: Image.network(
+          //   "$img",
+          //   fit: BoxFit.contain,
+          // ),
         ),
         Text("가게이름 : $name"),
         Text("주소 : $address"),
@@ -123,7 +114,7 @@ Widget buildBottomSheet(BuildContext context) {
         Text("영업시간 : $time"),
         Text("휴무일 : $holiday"),
         Text("SNS : $url"),
-        Text("유튜브 : $youtube"),
+        // Text("유튜브 : $youtube"),
         SizedBox(
           height: 50,
         ),
